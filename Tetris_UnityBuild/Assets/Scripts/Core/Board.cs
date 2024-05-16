@@ -10,8 +10,15 @@ namespace TetrisPuzzle.Core
         [SerializeField] private Vector2Int size = new Vector2Int(10, 30);
         [SerializeField] private int header = 8;
 
+        private Transform[,] grid;
+
 
         // Methods
+
+        private void Awake()
+        {
+            grid = new Transform[size.x, size.y];
+        }
 
         private void Start()
         {
