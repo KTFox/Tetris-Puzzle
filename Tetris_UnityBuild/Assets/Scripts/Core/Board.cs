@@ -46,6 +46,11 @@ namespace TetrisPuzzle.Core
                 {
                     return false;
                 }
+
+                if (IsOccupied(child.position))
+                {
+                    return false;
+                }
             }
 
             return true;
@@ -54,6 +59,20 @@ namespace TetrisPuzzle.Core
         private bool IsWithinBoard(Vector2 position)
         {
             return position.x >= 0 && position.x < size.x && position.y >= 0;
+        }
+
+        private bool IsOccupied(Vector2 position)
+        {
+            // TO-DO: Need add Shape condition?
+            return grid[(int)position.x, (int)position.y] != null;
+        }
+
+        public void StoreShapeInGrid(Shape shape)
+        {
+            foreach (Transform child in shape.transform)
+            {
+                grid[(int)child.position.x, (int)child.position.y] = child;
+            }
         }
     }
 }

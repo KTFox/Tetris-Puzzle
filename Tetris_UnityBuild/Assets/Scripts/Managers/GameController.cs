@@ -38,6 +38,8 @@ namespace TetrisPuzzle.Managers
                     if (!board.IsValidPosition(activeShape))
                     {
                         activeShape.MoveUp();
+                        board.StoreShapeInGrid(activeShape);
+
                         activeShape = shapeSpawner.SpawnShape();
                     }
                 }
