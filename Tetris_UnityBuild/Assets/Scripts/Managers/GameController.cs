@@ -7,8 +7,12 @@ namespace TetrisPuzzle.Managers
     {
         // Variables
 
+        [SerializeField] private float dropInterval;
+
         private Board board;
         private ShapeSpawner shapeSpawner;
+        private Shape activeShape;
+        private float timeToDrop;
 
 
         // Methods
@@ -17,6 +21,21 @@ namespace TetrisPuzzle.Managers
         {
             board = FindObjectOfType<Board>();
             shapeSpawner = FindObjectOfType<ShapeSpawner>();
+
+            activeShape = shapeSpawner.SpawnShape();
+        }
+
+        private void Update()
+        {
+            if (Time.time > timeToDrop)
+            {
+                timeToDrop = Time.time + dropInterval;
+
+                if (activeShape != null)
+                {
+                    activeShape.MoveDown();
+                }
+            }
         }
     }
 }

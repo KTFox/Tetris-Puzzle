@@ -11,22 +11,22 @@ namespace TetrisPuzzle.Core
 
         // Methods
 
-        private void MoveUp()
+        public void MoveUp()
         {
             Move(Vector3.up);
         }
 
-        private void MoveDown()
+        public void MoveDown()
         {
             Move(Vector3.down);
         }
 
-        private void MoveLeft()
+        public void MoveLeft()
         {
             Move(Vector3.left);
         }
 
-        private void MoveRight()
+        public void MoveRight()
         {
             Move(Vector3.right);
         }
@@ -36,7 +36,7 @@ namespace TetrisPuzzle.Core
             transform.position += moveDirection;
         }
 
-        private void RotateLeft()
+        public void RotateLeft()
         {
             if (canRotate)
             {
@@ -44,7 +44,7 @@ namespace TetrisPuzzle.Core
             }
         }
 
-        private void RotateRight()
+        public void RotateRight()
         {
             if (canRotate)
             {
