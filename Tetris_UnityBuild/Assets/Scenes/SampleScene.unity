@@ -152,7 +152,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5327a8b46def0a34aaae4db936dc513d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnPosition: {x: 5, y: 22, z: 0}
   shapes:
   - {fileID: 5701642805207225536, guid: 23183d71c0f3eed45b866810f1da5d4c, type: 3}
   - {fileID: 3277679987562498226, guid: 3c803608ecd49b7458e3482933ee8673, type: 3}
