@@ -34,6 +34,12 @@ namespace TetrisPuzzle.Managers
                 if (activeShape != null)
                 {
                     activeShape.MoveDown();
+
+                    if (!board.IsValidPosition(activeShape))
+                    {
+                        activeShape.MoveUp();
+                        activeShape = shapeSpawner.SpawnShape();
+                    }
                 }
             }
         }

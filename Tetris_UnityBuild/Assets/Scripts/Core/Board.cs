@@ -37,5 +37,23 @@ namespace TetrisPuzzle.Core
                 }
             }
         }
+
+        public bool IsValidPosition(Shape shape)
+        {
+            foreach (Transform child in shape.transform)
+            {
+                if (!IsWithinBoard(child.position))
+                {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
+        private bool IsWithinBoard(Vector2 position)
+        {
+            return position.x >= 0 && position.x < size.x && position.y >= 0;
+        }
     }
 }
