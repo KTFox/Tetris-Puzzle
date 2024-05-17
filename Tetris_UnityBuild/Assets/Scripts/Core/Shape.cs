@@ -1,21 +1,56 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-namespace TetrisPuzzle
+namespace TetrisPuzzle.Core
 {
     public class Shape : MonoBehaviour
     {
-        // Start is called before the first frame update
-        void Start()
+        // Variables
+
+        [SerializeField] private bool canRotate = true;
+
+
+        // Methods
+
+        private void MoveUp()
         {
-        
+            Move(Vector3.up);
         }
 
-        // Update is called once per frame
-        void Update()
+        private void MoveDown()
         {
-        
+            Move(Vector3.down);
         }
+
+        private void MoveLeft()
+        {
+            Move(Vector3.left);
+        }
+
+        private void MoveRight()
+        {
+            Move(Vector3.right);
+        }
+
+        private void Move(Vector3 moveDirection)
+        {
+            transform.position += moveDirection;
+        }
+
+        private void RotateLeft()
+        {
+            if (canRotate)
+            {
+                transform.Rotate(new Vector3(0, 0, 90));
+            }
+        }
+
+        private void RotateRight()
+        {
+            if (canRotate)
+            {
+                transform.Rotate(new Vector3(0, 0, -90));
+            }
+        }
+
     }
 }
