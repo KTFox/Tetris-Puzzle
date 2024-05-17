@@ -9,5 +9,14 @@ namespace TetrisPuzzle.Managers
 
         private Board board;
         private ShapeSpawner shapeSpawner;
+
+
+        // Methods
+
+        private void Start()
+        {
+            board = FindObjectOfType<Board>();
+            shapeSpawner = FindObjectOfType<ShapeSpawner>();
+        }
     }
 }
