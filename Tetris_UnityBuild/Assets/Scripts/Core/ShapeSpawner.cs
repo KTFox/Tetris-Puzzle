@@ -10,6 +10,7 @@ namespace TetrisPuzzle.Core
 
         private Vector3Int spawnPosition = new Vector3Int(5, 23, 0);
 
+
         // Methods
 
         public Shape SpawnShape()
