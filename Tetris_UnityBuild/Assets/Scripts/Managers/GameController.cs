@@ -1,3 +1,4 @@
+using System;
 using TetrisPuzzle.Core;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -26,6 +27,9 @@ namespace TetrisPuzzle.Managers
 
         private bool isGameOver;
 
+        // Events
+        public event Action OnMoveShape;
+
 
         // Methods
 
@@ -52,6 +56,7 @@ namespace TetrisPuzzle.Managers
                 timeToNextKey = Time.time + keyRepeatInterval;
 
                 activeShape.MoveRight();
+                OnMoveShape?.Invoke();
 
                 if (!board.IsValidPosition(activeShape))
                 {
@@ -63,6 +68,7 @@ namespace TetrisPuzzle.Managers
                 timeToNextKey = Time.time + keyRepeatInterval;
 
                 activeShape.MoveLeft();
+                OnMoveShape?.Invoke();
 
                 if (!board.IsValidPosition(activeShape))
                 {
@@ -72,6 +78,7 @@ namespace TetrisPuzzle.Managers
             else if (Input.GetButtonDown("Rotate"))
             {
                 activeShape.RotateRight();
+                OnMoveShape?.Invoke();
 
                 if (!board.IsValidPosition(activeShape))
                 {
@@ -84,6 +91,7 @@ namespace TetrisPuzzle.Managers
                 timeToNextMoveDownKey = Time.time + moveDownKeyRepeatInterval;
 
                 activeShape.MoveDown();
+                OnMoveShape?.Invoke();
 
                 if (!board.IsValidPosition(activeShape))
                 {
