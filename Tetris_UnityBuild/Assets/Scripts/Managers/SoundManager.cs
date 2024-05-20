@@ -1,4 +1,5 @@
 using System;
+using TetrisPuzzle.Core;
 using TetrisPuzzle.Managers;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -40,12 +41,26 @@ namespace TetrisPuzzle
             SetSFXVolume(0.5f);
             PlayMusic("BackgroundMusic");
 
-            FindObjectOfType<GameController>().OnMoveShape += SoundManager_OnMoveShape;
+            FindObjectOfType<GameController>().OnMoveShape += GameManager_OnMoveShape;
+            FindObjectOfType<Board>().OnClearRows += Board_OnClearRows;
         }
 
-        private void SoundManager_OnMoveShape()
+        private void GameManager_OnMoveShape()
         {
             PlaySFX("MoveSFX");
+        }
+
+        private void Board_OnClearRows(int clearedRowAmount)
+        {
+            if (clearedRowAmount > 0)
+            {
+                PlaySFX("ClearRowSFX");
+
+                if (clearedRowAmount > 1)
+                {
+                    PlaySFX("ClearMultipleRowsSFX");
+                }
+            }
         }
 
         public void PlayMusic(string name)

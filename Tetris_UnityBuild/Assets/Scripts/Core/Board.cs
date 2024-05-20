@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace TetrisPuzzle.Core
@@ -11,6 +12,10 @@ namespace TetrisPuzzle.Core
         [SerializeField] private int header = 8;
 
         private Transform[,] grid;
+
+        // Events
+
+        public event Action<int> OnClearRows;
 
 
         // Methods
@@ -80,15 +85,20 @@ namespace TetrisPuzzle.Core
 
         public void ClearAllCompletedRows()
         {
+            int clearedRowAmount = 0;
+
             for (int i = 0; i < size.y; i++)
             {
                 if (IsCompleted(i))
                 {
+                    clearedRowAmount++;
                     ClearRow(i);
                     ShiftRowsDown(i + 1);
                     i--;
                 }
             }
+
+            OnClearRows?.Invoke(clearedRowAmount);
         }
 
         private bool IsCompleted(int rowIndex)

@@ -1553,6 +1553,13 @@ MonoBehaviour:
   - Name: MoveSFX
     AudioClip:
     - {fileID: 8300000, guid: f3961f74b8f7e5b41849c475c236bf68, type: 3}
+  - Name: ClearRowSFX
+    AudioClip:
+    - {fileID: 8300000, guid: 23914e3dc789c6443aee3d2758aa54a9, type: 3}
+  - Name: ClearMultipleRowsSFX
+    AudioClip:
+    - {fileID: 8300000, guid: 09e21287f7c9913489e69fbc25404292, type: 3}
+    - {fileID: 8300000, guid: e26987df0653e8049a7f34c7df791153, type: 3}
   musicSource: {fileID: 379787330}
   sfxSource: {fileID: 783686166}
 --- !u!4 &1082865060
