@@ -780,7 +780,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0abd5dbf1fb816c4da662f72bb81c5a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shapeDroppingInterval: 0.5
 --- !u!1 &873139056
 GameObject:
   m_ObjectHideFlags: 0
@@ -2351,9 +2350,9 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 519420032}
-  - {fileID: 453056062}
   - {fileID: 268846966}
   - {fileID: 1218452063}
   - {fileID: 690530994}
+  - {fileID: 453056062}
   - {fileID: 859721761}
   - {fileID: 159325636}

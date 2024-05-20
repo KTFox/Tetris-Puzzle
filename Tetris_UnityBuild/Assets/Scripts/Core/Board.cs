@@ -77,5 +77,61 @@ namespace TetrisPuzzle.Core
                 grid[childPos.x, childPos.y] = child;
             }
         }
+
+        public void ClearAllCompletedRows()
+        {
+            for (int i = 0; i < size.y; i++)
+            {
+                if (IsCompleted(i))
+                {
+                    ClearRow(i);
+                    ShiftRowsDown(i + 1);
+                    i--;
+                }
+            }
+        }
+
+        private bool IsCompleted(int rowIndex)
+        {
+            for (int i = 0; i < size.x; i++)
+            {
+                if (grid[i, rowIndex] == null)
+                {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
+        private void ClearRow(int rowIndex)
+        {
+            for (int i = 0; i < size.x; i++)
+            {
+                Destroy(grid[i, rowIndex].gameObject);
+                grid[i, rowIndex] = null;
+            }
+        }
+
+        private void ShiftRowsDown(int startRowIndex)
+        {
+            for (int i = startRowIndex; i < size.y; i++)
+            {
+                ShiftOneRowDown(i);
+            }
+        }
+
+        private void ShiftOneRowDown(int rowIndex)
+        {
+            for (int i = 0; i < size.x; i++)
+            {
+                if (grid[i, rowIndex] != null)
+                {
+                    grid[i, rowIndex].position += Vector3.down;
+                    grid[i, rowIndex - 1] = grid[i, rowIndex];
+                    grid[i, rowIndex] = null;
+                }
+            }
+        }
     }
 }

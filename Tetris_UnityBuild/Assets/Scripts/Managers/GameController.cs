@@ -88,6 +88,7 @@ namespace TetrisPuzzle.Managers
         {
             activeShape.MoveUp();
             board.StoreShapeInGrid(activeShape);
+            board.ClearAllCompletedRows();
             activeShape = shapeSpawner.SpawnShape();
         }
     }
