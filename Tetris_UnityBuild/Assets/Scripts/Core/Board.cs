@@ -42,12 +42,14 @@ namespace TetrisPuzzle.Core
         {
             foreach (Transform child in shape.transform)
             {
-                if (!IsWithinBoard(child.position))
+                Vector2Int childPosition = Vector2Int.RoundToInt(child.position);
+
+                if (!IsWithinBoard(childPosition))
                 {
                     return false;
                 }
 
-                if (IsOccupied(child.position))
+                if (IsOccupied(childPosition))
                 {
                     return false;
                 }
@@ -56,22 +58,23 @@ namespace TetrisPuzzle.Core
             return true;
         }
 
-        private bool IsWithinBoard(Vector2 position)
+        private bool IsWithinBoard(Vector2Int position)
         {
             return position.x >= 0 && position.x < size.x && position.y >= 0;
         }
 
-        private bool IsOccupied(Vector2 position)
+        private bool IsOccupied(Vector2Int position)
         {
             // TO-DO: Need add Shape condition?
-            return grid[(int)position.x, (int)position.y] != null;
+            return grid[position.x, position.y] != null;
         }
 
         public void StoreShapeInGrid(Shape shape)
         {
             foreach (Transform child in shape.transform)
             {
-                grid[(int)child.position.x, (int)child.position.y] = child;
+                Vector2Int childPos = Vector2Int.RoundToInt(child.position);
+                grid[childPos.x, childPos.y] = child;
             }
         }
     }
