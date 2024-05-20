@@ -1,11 +1,14 @@
 using TetrisPuzzle.Core;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace TetrisPuzzle.Managers
 {
     public class GameController : MonoBehaviour
     {
         // Variables
+
+        [SerializeField] private GameObject gameOverPanel;
 
         private Board board;
         private ShapeSpawner shapeSpawner;
@@ -21,6 +24,8 @@ namespace TetrisPuzzle.Managers
         private float moveDownKeyRepeatInterval = 0.02f;
         private float timeToNextMoveDownKey;
 
+        private bool isGameOver;
+
 
         // Methods
 
@@ -29,11 +34,14 @@ namespace TetrisPuzzle.Managers
             board = FindObjectOfType<Board>();
             shapeSpawner = FindObjectOfType<ShapeSpawner>();
 
+            gameOverPanel.SetActive(false);
             activeShape = shapeSpawner.SpawnShape();
         }
 
         private void Update()
         {
+            if (isGameOver) return;
+
             HandlePlayerInput();
         }
 
@@ -87,9 +95,23 @@ namespace TetrisPuzzle.Managers
         private void LandShape()
         {
             activeShape.MoveUp();
-            board.StoreShapeInGrid(activeShape);
-            board.ClearAllCompletedRows();
-            activeShape = shapeSpawner.SpawnShape();
+
+            if (!board.IsOverLimit(activeShape))
+            {
+                board.StoreShapeInGrid(activeShape);
+                board.ClearAllCompletedRows();
+                activeShape = shapeSpawner.SpawnShape();
+            }
+            else
+            {
+                isGameOver = true;
+                gameOverPanel.SetActive(true);
+            }
+        }
+
+        public void RestartGame()
+        {
+            SceneManager.LoadScene(0);
         }
     }
 }

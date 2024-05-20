@@ -133,5 +133,18 @@ namespace TetrisPuzzle.Core
                 }
             }
         }
+
+        public bool IsOverLimit(Shape shape)
+        {
+            foreach (Transform child in shape.transform)
+            {
+                if (child.position.y >= size.y - header)
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
     }
 }
