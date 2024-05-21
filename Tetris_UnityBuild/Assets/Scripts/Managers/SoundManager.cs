@@ -36,7 +36,7 @@ namespace TetrisPuzzle
             SetSFXVolume(0.1f);
             PlayMusic("BackgroundMusic");
 
-            FindObjectOfType<GameController>().OnMoveShape += GameManager_OnMoveShape;
+            FindObjectOfType<GameManager>().OnMoveShape += GameManager_OnMoveShape;
             FindObjectOfType<Board>().OnClearRows += Board_OnClearRows;
         }
 

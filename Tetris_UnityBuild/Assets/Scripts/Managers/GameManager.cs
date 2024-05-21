@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 namespace TetrisPuzzle.Managers
 {
-    public class GameController : MonoBehaviour
+    public class GameManager : MonoBehaviour
     {
         // Variables
 

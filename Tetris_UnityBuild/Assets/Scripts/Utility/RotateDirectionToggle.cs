@@ -12,7 +12,7 @@ namespace TetrisPuzzle.Utilities
         [SerializeField] private Sprite rotateLeftIcon;
 
         private Image image;
-        private GameController gameController;
+        private GameManager gameController;
 
 
         // Methods
@@ -24,7 +24,7 @@ namespace TetrisPuzzle.Utilities
 
         private void Start()
         {
-            gameController = FindObjectOfType<GameController>();
+            gameController = FindObjectOfType<GameManager>();
 
             image.sprite = gameController.IsRotateRight ? rotateRightIcon : rotateLeftIcon;
         }
