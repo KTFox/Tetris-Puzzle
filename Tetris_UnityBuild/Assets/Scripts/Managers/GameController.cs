@@ -10,6 +10,7 @@ namespace TetrisPuzzle.Managers
         // Variables
 
         [SerializeField] private GameObject gameOverPanel;
+        [SerializeField] private GameObject pausePanel;
 
         private Board board;
         private ShapeSpawner shapeSpawner;
@@ -46,6 +47,7 @@ namespace TetrisPuzzle.Managers
             shapeSpawner = FindObjectOfType<ShapeSpawner>();
 
             gameOverPanel.SetActive(false);
+            pausePanel.SetActive(false);
             activeShape = shapeSpawner.SpawnShape();
         }
 
@@ -142,6 +144,12 @@ namespace TetrisPuzzle.Managers
         public void ChangeRotateDirection()
         {
             isRotateRight = !isRotateRight;
+        }
+
+        public void TogglePauseGame()
+        {
+            Time.timeScale = Time.timeScale == 1 ? 0 : 1;
+            pausePanel.SetActive(!pausePanel.gameObject.activeSelf);
         }
 
         public void RestartGame()
