@@ -10,10 +10,13 @@ namespace TetrisPuzzle
     {
         // Variables
 
-        public static SoundManager Instance;
-
         [SerializeField] private Sound[] musicSounds, sfxSounds;
         [SerializeField] private AudioSource musicSource, sfxSource;
+
+        // Properties
+
+        public bool IsMusicMuted => musicSource.mute;
+        public bool IsSFXMuted => sfxSource.mute;
 
         // Structs
 
@@ -27,18 +30,10 @@ namespace TetrisPuzzle
 
         // Methods
 
-        private void Awake()
-        {
-            if (Instance == null)
-            {
-                Instance = this;
-            }
-        }
-
         private void Start()
         {
-            SetMusicVolume(0.5f);
-            SetSFXVolume(0.5f);
+            SetMusicVolume(0.1f);
+            SetSFXVolume(0.1f);
             PlayMusic("BackgroundMusic");
 
             FindObjectOfType<GameController>().OnMoveShape += GameManager_OnMoveShape;

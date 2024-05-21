@@ -760,7 +760,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &501327430
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1394,7 +1394,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 790515178657551669, guid: 32c4749b4727baf46b9ac5d13307c799, type: 3}
       propertyPath: m_Name
-      value: FX
+      value: FX Toggle Button
       objectReference: {fileID: 0}
     - target: {fileID: 1175151047738350663, guid: 32c4749b4727baf46b9ac5d13307c799, type: 3}
       propertyPath: m_Name
@@ -1509,13 +1509,99 @@ PrefabInstance:
     - {fileID: 372415018451395419, guid: 32c4749b4727baf46b9ac5d13307c799, type: 3}
     - {fileID: 1175151047738350663, guid: 32c4749b4727baf46b9ac5d13307c799, type: 3}
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 790515178657551669, guid: 32c4749b4727baf46b9ac5d13307c799, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1039022754}
+    - targetCorrespondingSourceObject: {fileID: 6930964174922649285, guid: 32c4749b4727baf46b9ac5d13307c799, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1067644819}
   m_SourcePrefab: {fileID: 100100000, guid: 32c4749b4727baf46b9ac5d13307c799, type: 3}
 --- !u!224 &998908319 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 6052673769303034204, guid: 32c4749b4727baf46b9ac5d13307c799, type: 3}
   m_PrefabInstance: {fileID: 998908318}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1039022752 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 790515178657551669, guid: 32c4749b4727baf46b9ac5d13307c799, type: 3}
+  m_PrefabInstance: {fileID: 998908318}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1039022754
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1039022752}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Navigation:
+    m_Mode: 3
+    m_WrapAround: 0
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_SelectedTrigger: Selected
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 0}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1067644819}
+        m_TargetAssemblyTypeName: TetrisPuzzle.Utilities.SFXIconToggle, Assembly-CSharp
+        m_MethodName: ToggleSFX
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!1 &1067644815 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6930964174922649285, guid: 32c4749b4727baf46b9ac5d13307c799, type: 3}
+  m_PrefabInstance: {fileID: 998908318}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1067644819
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1067644815}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3b5d40f55c74ea4ea627530f97af26f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  activeIcon: {fileID: 21300000, guid: cab539ceb489f6b4fb75a5b89eb1424d, type: 3}
+  inactiveIcon: {fileID: 21300000, guid: c65221e05a8a91043bea157432cb26d7, type: 3}
 --- !u!1 &1082865058
 GameObject:
   m_ObjectHideFlags: 0
@@ -2363,7 +2449,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 790515178657551669, guid: 32c4749b4727baf46b9ac5d13307c799, type: 3}
       propertyPath: m_Name
-      value: Music
+      value: Music Toggle Button
       objectReference: {fileID: 0}
     - target: {fileID: 1175151047738350663, guid: 32c4749b4727baf46b9ac5d13307c799, type: 3}
       propertyPath: m_Name
@@ -2478,7 +2564,13 @@ PrefabInstance:
     - {fileID: 372415018451395419, guid: 32c4749b4727baf46b9ac5d13307c799, type: 3}
     - {fileID: 1175151047738350663, guid: 32c4749b4727baf46b9ac5d13307c799, type: 3}
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 790515178657551669, guid: 32c4749b4727baf46b9ac5d13307c799, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2121647072}
+    - targetCorrespondingSourceObject: {fileID: 6930964174922649285, guid: 32c4749b4727baf46b9ac5d13307c799, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1967925814}
   m_SourcePrefab: {fileID: 100100000, guid: 32c4749b4727baf46b9ac5d13307c799, type: 3}
 --- !u!224 &1449790021 stripped
 RectTransform:
@@ -2998,6 +3090,25 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1870474027}
   m_CullTransparentMesh: 1
+--- !u!1 &1967925810 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6930964174922649285, guid: 32c4749b4727baf46b9ac5d13307c799, type: 3}
+  m_PrefabInstance: {fileID: 1449790020}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1967925814
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1967925810}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6139a80e3b4a8334a90f75fb89f70e1b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  activeIcon: {fileID: 21300000, guid: b7c41d508543c46499314bc3060ee47d, type: 3}
+  inactiveIcon: {fileID: 21300000, guid: 422cfcd8fa1907c4b95cc4771e11bf28, type: 3}
 --- !u!1 &2030654228
 GameObject:
   m_ObjectHideFlags: 0
@@ -3207,6 +3318,67 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2053693702}
   m_CullTransparentMesh: 1
+--- !u!1 &2121647070 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 790515178657551669, guid: 32c4749b4727baf46b9ac5d13307c799, type: 3}
+  m_PrefabInstance: {fileID: 1449790020}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2121647072
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2121647070}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Navigation:
+    m_Mode: 3
+    m_WrapAround: 0
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_SelectedTrigger: Selected
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 0}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1967925814}
+        m_TargetAssemblyTypeName: TetrisPuzzle.MusicIconToggle, Assembly-CSharp
+        m_MethodName: ToggleMusic
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1001 &6119087081984662710
 PrefabInstance:
   m_ObjectHideFlags: 0
