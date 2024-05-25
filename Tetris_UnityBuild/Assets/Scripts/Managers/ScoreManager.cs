@@ -1,3 +1,4 @@
+using TetrisPuzzle.Core;
 using UnityEngine;
 
 namespace TetrisPuzzle
@@ -18,6 +19,8 @@ namespace TetrisPuzzle
         private void Start()
         {
             ResetScore();
+
+            FindObjectOfType<Board>().OnClearRows += ScoreManager_OnClearRows;
         }
 
         private void ResetScore()
@@ -26,9 +29,9 @@ namespace TetrisPuzzle
             lines = linesPerLevel * level;
         }
 
-        public void ScoreLines(int lines)
+        private void ScoreManager_OnClearRows(int rows)
         {
-            switch (lines)
+            switch (rows)
             {
                 case 1:
                     score += 40 * level;
