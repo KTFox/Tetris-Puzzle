@@ -15,7 +15,7 @@ namespace TetrisPuzzle.Core
 
         // Events
 
-        public event Action<int> OnClearRows;
+        public event Action<int> OnClearLines;
 
 
         // Methods
@@ -98,7 +98,7 @@ namespace TetrisPuzzle.Core
                 }
             }
 
-            OnClearRows?.Invoke(clearedRowAmount);
+            OnClearLines?.Invoke(clearedRowAmount);
         }
 
         private bool IsCompleted(int rowIndex)

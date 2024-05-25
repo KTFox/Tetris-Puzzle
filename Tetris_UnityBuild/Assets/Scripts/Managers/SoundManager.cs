@@ -37,7 +37,8 @@ namespace TetrisPuzzle
             PlayMusic("BackgroundMusic");
 
             FindObjectOfType<GameManager>().OnMoveShape += GameManager_OnMoveShape;
-            FindObjectOfType<Board>().OnClearRows += Board_OnClearRows;
+            FindObjectOfType<Board>().OnClearLines += Board_OnClearRows;
+            FindObjectOfType<ScoreManager>().OnLevelUp += SoundManager_OnLevelUp;
         }
 
         private void GameManager_OnMoveShape()
@@ -58,6 +59,11 @@ namespace TetrisPuzzle
             }
         }
 
+        private void SoundManager_OnLevelUp()
+        {
+            PlaySFX("LevelUpSFX");
+        }
+
         public void PlayMusic(string name)
         {
             Sound sound = Array.Find(musicSounds, x => x.Name == name);
@@ -65,6 +71,10 @@ namespace TetrisPuzzle
             {
                 musicSource.clip = sound.AudioClip[0];
                 musicSource.Play();
+            }
+            else
+            {
+                Debug.LogWarning($"{name} is missing!!!");
             }
         }
 
@@ -74,6 +84,10 @@ namespace TetrisPuzzle
             if (sound != null)
             {
                 sfxSource.PlayOneShot(sound.AudioClip[Random.Range(0, sound.AudioClip.Length)]);
+            }
+            else
+            {
+                Debug.LogWarning($"{name} is missing!!!");
             }
         }
 

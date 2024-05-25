@@ -1,3 +1,4 @@
+using System;
 using TetrisPuzzle.Core;
 using UnityEngine;
 
@@ -19,6 +20,10 @@ namespace TetrisPuzzle
         public int Lines => lines;
         public int Level => level;
 
+        // Events
+
+        public event Action OnLevelUp;
+
 
         // Methods
 
@@ -26,7 +31,7 @@ namespace TetrisPuzzle
         {
             ResetScore();
 
-            FindObjectOfType<Board>().OnClearRows += ScoreManager_OnClearRows;
+            FindObjectOfType<Board>().OnClearLines += ScoreManager_OnClearLines;
         }
 
         private void ResetScore()
@@ -35,9 +40,9 @@ namespace TetrisPuzzle
             lines = linesPerLevel * level;
         }
 
-        private void ScoreManager_OnClearRows(int rows)
+        private void ScoreManager_OnClearLines(int lines)
         {
-            switch (rows)
+            switch (lines)
             {
                 case 1:
                     score += 40 * level;
@@ -52,6 +57,20 @@ namespace TetrisPuzzle
                     score += 1200 * level;
                     break;
             }
+
+            this.lines -= lines;
+            if (this.lines <= 0)
+            {
+                LevelUp();
+            }
+        }
+
+        private void LevelUp()
+        {
+            level++;
+            lines = linesPerLevel * level;
+
+            OnLevelUp?.Invoke();
         }
     }
 }
