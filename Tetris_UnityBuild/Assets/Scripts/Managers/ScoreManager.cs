@@ -8,8 +8,7 @@ namespace TetrisPuzzle
     {
         // Variables
 
-        [SerializeField] private int linesPerLevel = 5;
-
+        private int linesPerLevel = 2;
         private int score;
         private int lines;
         private int level = 1;

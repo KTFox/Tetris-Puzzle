@@ -12,11 +12,14 @@ namespace TetrisPuzzle.Managers
         [SerializeField] private GameObject gameOverPanel;
         [SerializeField] private GameObject pausePanel;
 
+        private ScoreManager scoreManager;
         private Board board;
         private ShapeSpawner shapeSpawner;
         private Shape activeShape;
 
-        private float shapeDroppingInterval = 0.5f;
+        // Drop speed balancing
+        private float defaultDroppingInterval = 0.5f;
+        private float accelerationFactor = 0.1f;
         private float timeToDrop;
 
         // Used for left,right keys
@@ -24,7 +27,7 @@ namespace TetrisPuzzle.Managers
         private float timeToNextKey;
 
         // Used for down key
-        private float moveDownKeyRepeatInterval = 0.02f;
+        private float moveDownKeyRepeatInterval = 0.05f;
         private float timeToNextMoveDownKey;
 
         private bool isRotateRight = true;
@@ -43,6 +46,7 @@ namespace TetrisPuzzle.Managers
 
         private void Start()
         {
+            scoreManager = FindObjectOfType<ScoreManager>();
             board = FindObjectOfType<Board>();
             shapeSpawner = FindObjectOfType<ShapeSpawner>();
 
@@ -111,7 +115,7 @@ namespace TetrisPuzzle.Managers
             }
             else if ((Input.GetButton("MoveDown") && Time.time > timeToNextMoveDownKey) || Time.time > timeToDrop)
             {
-                timeToDrop = Time.time + shapeDroppingInterval;
+                timeToDrop = Time.time + GetDroppingInterval();
                 timeToNextMoveDownKey = Time.time + moveDownKeyRepeatInterval;
 
                 activeShape.MoveDown();
@@ -122,6 +126,11 @@ namespace TetrisPuzzle.Managers
                     LandShape();
                 }
             }
+        }
+
+        private float GetDroppingInterval()
+        {
+            return defaultDroppingInterval * Mathf.Pow(1 - accelerationFactor, scoreManager.Level - 1);
         }
 
         private void LandShape()
