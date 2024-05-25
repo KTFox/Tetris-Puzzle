@@ -12,10 +12,10 @@ namespace TetrisPuzzle.Managers
         [SerializeField] private GameObject gameOverPanel;
         [SerializeField] private GameObject pausePanel;
 
+        // Caching 
         private ScoreManager scoreManager;
         private Board board;
         private ShapeSpawner shapeSpawner;
-        private Shape activeShape;
 
         // Drop speed balancing
         private float defaultDroppingInterval = 0.5f;
@@ -30,6 +30,7 @@ namespace TetrisPuzzle.Managers
         private float moveDownKeyRepeatInterval = 0.05f;
         private float timeToNextMoveDownKey;
 
+        private Shape activeShape;
         private bool isRotateRight = true;
         private bool isGameOver;
 
