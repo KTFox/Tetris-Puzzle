@@ -13,6 +13,12 @@ namespace TetrisPuzzle
         private int lines;
         private int level = 1;
 
+        // Properties
+
+        public int Score => score;
+        public int Lines => lines;
+        public int Level => level;
+
 
         // Methods
 
