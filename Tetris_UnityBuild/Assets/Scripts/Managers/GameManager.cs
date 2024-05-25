@@ -16,6 +16,7 @@ namespace TetrisPuzzle.Managers
         private ScoreManager scoreManager;
         private Board board;
         private ShapeSpawner shapeSpawner;
+        private GhostDrawer ghostDrawer;
 
         // Drop speed balancing
         private float defaultDroppingInterval = 0.5f;
@@ -50,6 +51,7 @@ namespace TetrisPuzzle.Managers
             scoreManager = FindObjectOfType<ScoreManager>();
             board = FindObjectOfType<Board>();
             shapeSpawner = FindObjectOfType<ShapeSpawner>();
+            ghostDrawer = FindObjectOfType<GhostDrawer>();
 
             gameOverPanel.SetActive(false);
             pausePanel.SetActive(false);
@@ -61,6 +63,11 @@ namespace TetrisPuzzle.Managers
             if (isGameOver) return;
 
             HandlePlayerInput();
+        }
+
+        private void LateUpdate()
+        {
+            ghostDrawer.DrawGhost(activeShape);
         }
 
         private void HandlePlayerInput()
@@ -142,6 +149,7 @@ namespace TetrisPuzzle.Managers
             {
                 board.StoreShapeInGrid(activeShape);
                 board.ClearAllCompletedRows();
+                ghostDrawer.ResetGhostShape();
                 activeShape = shapeSpawner.SpawnShape();
             }
             else
