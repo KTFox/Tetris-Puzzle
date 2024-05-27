@@ -37,7 +37,7 @@ namespace TetrisPuzzle.Core
         private void SetNextShape()
         {
             Shape randomShape = GetRandomShape();
-            nextShape = Instantiate(randomShape, queueSpace.position + randomShape.QueueOffset, Quaternion.identity);
+            nextShape = Instantiate(randomShape, queueSpace.position + randomShape.BoxOffset, Quaternion.identity);
             nextShape.transform.localScale = QUEUED_SHAPE_SCALE;
         }
 
