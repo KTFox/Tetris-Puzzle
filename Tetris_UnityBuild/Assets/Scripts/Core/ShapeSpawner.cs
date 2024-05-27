@@ -7,17 +7,38 @@ namespace TetrisPuzzle.Core
         // variables
 
         [SerializeField] private Shape[] shapes;
+        [SerializeField] private Transform queueSpace;
 
-        private Vector3Int spawnPosition = new Vector3Int(5, 23, 0);
+        private readonly Vector3Int SPAWN_POSITION = new Vector3Int(5, 23, 0);
+        private readonly Vector3 DEFAULT_SHAPE_SCALE = Vector3.one;
+        private readonly Vector3 QUEUED_SHAPE_SCALE = new Vector3(0.5f, 0.5f, 0.5f);
+
+        private Shape nextShape;
 
 
         // Methods
 
         public Shape SpawnShape()
         {
-            Shape shape = Instantiate(GetRandomShape(), spawnPosition, Quaternion.identity);
+            if (nextShape == null)
+            {
+                SetNextShape();
+            }
 
-            return shape;
+            Shape newShape = nextShape;
+            newShape.transform.position = SPAWN_POSITION;
+            newShape.transform.localScale = DEFAULT_SHAPE_SCALE;
+
+            SetNextShape();
+
+            return newShape;
+        }
+
+        private void SetNextShape()
+        {
+            Shape randomShape = GetRandomShape();
+            nextShape = Instantiate(randomShape, queueSpace.position + randomShape.QueueOffset, Quaternion.identity);
+            nextShape.transform.localScale = QUEUED_SHAPE_SCALE;
         }
 
         private Shape GetRandomShape()

@@ -7,6 +7,11 @@ namespace TetrisPuzzle.Core
         // Variables
 
         [SerializeField] private bool canRotate = true;
+        [SerializeField] private Vector3 queueOffset;
+
+        // Events
+
+        public Vector3 QueueOffset => queueOffset;
 
 
         // Methods
