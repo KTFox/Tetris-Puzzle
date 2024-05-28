@@ -155,7 +155,7 @@ namespace TetrisPuzzle.Managers
 
             if (!board.IsOverLimit(activeShape))
             {
-                activeShape.PlayLandShapeFX();
+                activeShape.PlayLandingFX();
                 board.StoreShapeInGrid(activeShape);
                 board.StartCoroutine(nameof(board.ClearAllCompletedRows));
                 ghostDrawer.ResetGhostShape();

@@ -13,7 +13,7 @@ namespace TetrisPuzzle.Core
         private readonly string GLOW_SQUARE_TAG = "LandShapeFX";
         private GameObject[] glowSquareFX;
 
-        // Events
+        // Properties
 
         public Vector3 BoxOffset => boxOffset;
 
@@ -66,7 +66,7 @@ namespace TetrisPuzzle.Core
             }
         }
 
-        public void PlayLandShapeFX()
+        public void PlayLandingFX()
         {
             int i = 0;
             foreach (Transform child in transform)
