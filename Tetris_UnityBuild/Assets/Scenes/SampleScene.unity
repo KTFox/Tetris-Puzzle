@@ -1507,7 +1507,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -2227,6 +2227,12 @@ MonoBehaviour:
   - Name: LevelUpSFX
     AudioClip:
     - {fileID: 8300000, guid: 198d7577d0fbacd499c6d1082609e6bd, type: 3}
+  - Name: HoldSFX
+    AudioClip:
+    - {fileID: 8300000, guid: bda4651224da6534b93544e5af0226bc, type: 3}
+  - Name: FailHoldSFX
+    AudioClip:
+    - {fileID: 8300000, guid: bdadde2956e73ab49af03c85ebb52975, type: 3}
   musicSource: {fileID: 379787330}
   sfxSource: {fileID: 783686166}
 --- !u!4 &1082865060
@@ -4237,7 +4243,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 859721762}
         m_TargetAssemblyTypeName: TetrisPuzzle.Managers.GameManager, Assembly-CSharp
-        m_MethodName: HoldActiveShape
+        m_MethodName: HandleHoldingShape
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

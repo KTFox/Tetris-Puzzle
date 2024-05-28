@@ -32,11 +32,13 @@ namespace TetrisPuzzle
 
         private void Start()
         {
-            SetMusicVolume(0.1f);
-            SetSFXVolume(0.1f);
+            SetMusicVolume(0.5f);
+            SetSFXVolume(1f);
             PlayMusic("BackgroundMusic");
 
             FindObjectOfType<GameManager>().OnMoveShape += GameManager_OnMoveShape;
+            FindObjectOfType<GameManager>().OnHoldShape += GameManager_OnHoldShape;
+            FindObjectOfType<GameManager>().OnFailHoldShape += GameManager_OnFailHoldShape;
             FindObjectOfType<Board>().OnClearLines += Board_OnClearRows;
             FindObjectOfType<ScoreManager>().OnLevelUp += SoundManager_OnLevelUp;
         }
@@ -44,6 +46,16 @@ namespace TetrisPuzzle
         private void GameManager_OnMoveShape()
         {
             PlaySFX("MoveSFX");
+        }
+
+        private void GameManager_OnHoldShape()
+        {
+            PlaySFX("HoldSFX");
+        }
+
+        private void GameManager_OnFailHoldShape()
+        {
+            PlaySFX("FailHoldSFX");
         }
 
         private void Board_OnClearRows(int clearedRowAmount)

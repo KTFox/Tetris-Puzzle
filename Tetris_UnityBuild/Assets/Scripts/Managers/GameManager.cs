@@ -17,6 +17,7 @@ namespace TetrisPuzzle.Managers
         private Board board;
         private ShapeSpawner shapeSpawner;
         private GhostDrawer ghostDrawer;
+        private ShapeHolder shapeHolder;
 
         // Drop speed balancing
         private float defaultDroppingInterval = 0.5f;
@@ -42,6 +43,8 @@ namespace TetrisPuzzle.Managers
         // Events
 
         public event Action OnMoveShape;
+        public event Action OnHoldShape;
+        public event Action OnFailHoldShape;
 
 
         // Methods
@@ -52,6 +55,7 @@ namespace TetrisPuzzle.Managers
             board = FindObjectOfType<Board>();
             shapeSpawner = FindObjectOfType<ShapeSpawner>();
             ghostDrawer = FindObjectOfType<GhostDrawer>();
+            shapeHolder = FindObjectOfType<ShapeHolder>();
 
             gameOverPanel.SetActive(false);
             pausePanel.SetActive(false);
@@ -151,6 +155,7 @@ namespace TetrisPuzzle.Managers
                 board.ClearAllCompletedRows();
                 ghostDrawer.ResetGhostShape();
                 activeShape = shapeSpawner.SpawnShape();
+                shapeHolder.SetCanSwitch(true);
             }
             else
             {
@@ -162,6 +167,29 @@ namespace TetrisPuzzle.Managers
         public void ChangeRotateDirection()
         {
             isRotateRight = !isRotateRight;
+        }
+
+        public void HandleHoldingShape()
+        {
+            if (shapeHolder.IsEmptyHolder)
+            {
+                shapeHolder.HoldShape(activeShape);
+                activeShape = shapeSpawner.SpawnShape();
+                ghostDrawer.ResetGhostShape();
+
+                OnHoldShape?.Invoke();
+            }
+            else if (!shapeHolder.IsEmptyHolder && shapeHolder.CanSwitch)
+            {
+                activeShape = shapeHolder.SwitchShape(activeShape, activeShape.transform.position);
+                ghostDrawer.ResetGhostShape();
+
+                OnHoldShape?.Invoke();
+            }
+            else
+            {
+                OnFailHoldShape?.Invoke();
+            }
         }
 
         public void TogglePauseGame()
