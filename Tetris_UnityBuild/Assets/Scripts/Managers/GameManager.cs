@@ -138,6 +138,10 @@ namespace TetrisPuzzle.Managers
                     LandShape();
                 }
             }
+            else if (Input.GetButtonDown("Hold"))
+            {
+                HandleHoldingShape();
+            }
         }
 
         private float GetDroppingInterval()
