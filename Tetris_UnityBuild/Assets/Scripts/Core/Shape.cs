@@ -1,3 +1,4 @@
+using TetrisPuzzle.Utilities;
 using UnityEngine;
 
 namespace TetrisPuzzle.Core
@@ -9,12 +10,20 @@ namespace TetrisPuzzle.Core
         [SerializeField] private bool canRotate = true;
         [SerializeField] private Vector3 boxOffset;
 
+        private readonly string GLOW_SQUARE_TAG = "LandShapeFX";
+        private GameObject[] glowSquareFX;
+
         // Events
 
         public Vector3 BoxOffset => boxOffset;
 
 
         // Methods
+
+        private void Start()
+        {
+            glowSquareFX = GameObject.FindGameObjectsWithTag(GLOW_SQUARE_TAG);
+        }
 
         public void MoveUp()
         {
@@ -57,5 +66,16 @@ namespace TetrisPuzzle.Core
             }
         }
 
+        public void PlayLandShapeFX()
+        {
+            int i = 0;
+            foreach (Transform child in transform)
+            {
+                ParticlePlayer particlePlayer = glowSquareFX[i].GetComponent<ParticlePlayer>();
+                particlePlayer.transform.position = new Vector3(child.position.x, child.position.y, -2f);
+                particlePlayer.Play();
+                i++;
+            }
+        }
     }
 }
