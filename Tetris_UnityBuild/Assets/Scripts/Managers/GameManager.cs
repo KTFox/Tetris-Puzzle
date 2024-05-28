@@ -187,7 +187,12 @@ namespace TetrisPuzzle.Managers
             }
             else if (!shapeHolder.IsEmptyHolder && shapeHolder.CanSwitch)
             {
-                activeShape = shapeHolder.SwitchShape(activeShape, activeShape.transform.position);
+                Shape shapeToHold = activeShape;
+
+                activeShape = shapeHolder.ReleaseShape();
+                activeShape.transform.position = shapeSpawner.SpawnPosition;
+
+                shapeHolder.HoldShape(shapeToHold);
                 ghostDrawer.ResetGhostShape();
 
                 OnHoldShape?.Invoke();

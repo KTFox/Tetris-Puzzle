@@ -33,26 +33,20 @@ namespace TetrisPuzzle.Core
             heldShape = shape;
         }
 
-        public Shape SwitchShape(Shape shapeToHold, Vector3 releasePosition)
+        public Shape ReleaseShape()
         {
-            Shape shapeToRelease = null;
-
-            if (canSwitch)
+            if (heldShape == null || !canSwitch)
             {
-                shapeToRelease = heldShape;
-                ReleaseShape(releasePosition);
-                HoldShape(shapeToHold);
-                canSwitch = false;
+                return null;
             }
 
-            return shapeToRelease;
-        }
+            Shape shapeToRelease = heldShape;
+            shapeToRelease.transform.localScale = DEFAULT_SHAPE_SCALE;
 
-        private void ReleaseShape(Vector3 releasePosition)
-        {
-            heldShape.transform.position = releasePosition;
-            heldShape.transform.localScale = DEFAULT_SHAPE_SCALE;
             heldShape = null;
+            canSwitch = false;
+
+            return shapeToRelease;
         }
 
         public void SetCanSwitch(bool value)

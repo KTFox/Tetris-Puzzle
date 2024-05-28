@@ -15,6 +15,10 @@ namespace TetrisPuzzle.Core
 
         private Shape nextShape;
 
+        // Properties
+
+        public Vector3Int SpawnPosition => SPAWN_POSITION;
+
 
         // Methods
 
