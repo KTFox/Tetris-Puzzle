@@ -33,12 +33,7 @@ namespace TetrisPuzzle.Managers
         private float timeToNextMoveDownKey;
 
         private Shape activeShape;
-        private bool isRotateRight = true;
         private bool isGameOver;
-
-        // Properties
-
-        public bool IsRotateRight => isRotateRight;
 
         // Events
 
@@ -103,27 +98,13 @@ namespace TetrisPuzzle.Managers
             }
             else if (Input.GetButtonDown("Rotate"))
             {
-                if (isRotateRight)
-                {
-                    activeShape.RotateRight();
-                }
-                else
-                {
-                    activeShape.RotateLeft();
-                }
+                activeShape.RotateRight();
 
                 OnMoveShape?.Invoke();
 
                 if (!board.IsValidShapePosition(activeShape))
                 {
-                    if (isRotateRight)
-                    {
-                        activeShape.RotateLeft();
-                    }
-                    else
-                    {
-                        activeShape.RotateRight();
-                    }
+                    activeShape.RotateLeft();
                 }
             }
             else if ((Input.GetButton("MoveDown") && Time.time > timeToNextMoveDownKey) || Time.time > timeToDrop)
@@ -168,11 +149,6 @@ namespace TetrisPuzzle.Managers
                 isGameOver = true;
                 gameOverPanel.SetActive(true);
             }
-        }
-
-        public void ChangeRotateDirection()
-        {
-            isRotateRight = !isRotateRight;
         }
 
         public void HandleHoldingShape()
