@@ -30,7 +30,7 @@ namespace TetrisPuzzle
         {
             ResetScore();
 
-            FindObjectOfType<Board>().OnClearLines += ScoreManager_OnClearLines;
+            FindObjectOfType<Board>().OnClearRows += ScoreManager_OnClearLines;
         }
 
         private void ResetScore()

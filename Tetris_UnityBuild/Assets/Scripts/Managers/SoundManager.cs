@@ -39,7 +39,7 @@ namespace TetrisPuzzle
             FindObjectOfType<GameManager>().OnMoveShape += GameManager_OnMoveShape;
             FindObjectOfType<GameManager>().OnHoldShape += GameManager_OnHoldShape;
             FindObjectOfType<GameManager>().OnFailHoldShape += GameManager_OnFailHoldShape;
-            FindObjectOfType<Board>().OnClearLines += Board_OnClearRows;
+            FindObjectOfType<Board>().OnClearRows += Board_OnClearRows;
             FindObjectOfType<ScoreManager>().OnLevelUp += SoundManager_OnLevelUp;
         }
 

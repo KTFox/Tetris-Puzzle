@@ -59,6 +59,7 @@ namespace TetrisPuzzle.Managers
 
             gameOverPanel.SetActive(false);
             pausePanel.SetActive(false);
+
             activeShape = shapeSpawner.SpawnShape();
         }
 
@@ -83,7 +84,7 @@ namespace TetrisPuzzle.Managers
                 activeShape.MoveRight();
                 OnMoveShape?.Invoke();
 
-                if (!board.IsValidPosition(activeShape))
+                if (!board.IsValidShapePosition(activeShape))
                 {
                     activeShape.MoveLeft();
                 }
@@ -95,7 +96,7 @@ namespace TetrisPuzzle.Managers
                 activeShape.MoveLeft();
                 OnMoveShape?.Invoke();
 
-                if (!board.IsValidPosition(activeShape))
+                if (!board.IsValidShapePosition(activeShape))
                 {
                     activeShape.MoveRight();
                 }
@@ -113,7 +114,7 @@ namespace TetrisPuzzle.Managers
 
                 OnMoveShape?.Invoke();
 
-                if (!board.IsValidPosition(activeShape))
+                if (!board.IsValidShapePosition(activeShape))
                 {
                     if (isRotateRight)
                     {
@@ -133,7 +134,7 @@ namespace TetrisPuzzle.Managers
                 activeShape.MoveDown();
                 OnMoveShape?.Invoke();
 
-                if (!board.IsValidPosition(activeShape))
+                if (!board.IsValidShapePosition(activeShape))
                 {
                     LandShape();
                 }
@@ -153,7 +154,7 @@ namespace TetrisPuzzle.Managers
         {
             activeShape.MoveUp();
 
-            if (!board.IsOverLimit(activeShape))
+            if (!board.HasReachedBoardRoof(activeShape))
             {
                 activeShape.PlayLandingFX();
                 board.StoreShapeInGrid(activeShape);

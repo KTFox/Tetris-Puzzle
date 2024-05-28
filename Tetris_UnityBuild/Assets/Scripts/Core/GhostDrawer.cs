@@ -43,7 +43,7 @@ namespace TetrisPuzzle.Core
             while (!hitBottom)
             {
                 ghostShape.MoveDown();
-                if (!gameBoard.IsValidPosition(ghostShape))
+                if (!gameBoard.IsValidShapePosition(ghostShape))
                 {
                     ghostShape.MoveUp();
                     hitBottom = true;

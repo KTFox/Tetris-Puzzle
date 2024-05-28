@@ -18,7 +18,7 @@ namespace TetrisPuzzle.Core
 
         // Events
 
-        public event Action<int> OnClearLines;
+        public event Action<int> OnClearRows;
 
 
         // Methods
@@ -46,7 +46,7 @@ namespace TetrisPuzzle.Core
             }
         }
 
-        public bool IsValidPosition(Shape shape)
+        public bool IsValidShapePosition(Shape shape)
         {
             foreach (Transform child in shape.transform)
             {
@@ -73,7 +73,6 @@ namespace TetrisPuzzle.Core
 
         private bool IsOccupied(Vector2Int position)
         {
-            // TO-DO: Need add Shape condition?
             return grid[position.x, position.y] != null;
         }
 
@@ -113,7 +112,7 @@ namespace TetrisPuzzle.Core
                 }
             }
 
-            OnClearLines?.Invoke(clearedRowAmount);
+            OnClearRows?.Invoke(clearedRowAmount);
         }
 
         private bool IsCompleted(int rowIndex)
@@ -159,7 +158,7 @@ namespace TetrisPuzzle.Core
             }
         }
 
-        public bool IsOverLimit(Shape shape)
+        public bool HasReachedBoardRoof(Shape shape)
         {
             foreach (Transform child in shape.transform)
             {
