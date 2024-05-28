@@ -156,7 +156,7 @@ namespace TetrisPuzzle.Managers
             if (!board.IsOverLimit(activeShape))
             {
                 board.StoreShapeInGrid(activeShape);
-                board.ClearAllCompletedRows();
+                board.StartCoroutine(nameof(board.ClearAllCompletedRows));
                 ghostDrawer.ResetGhostShape();
                 activeShape = shapeSpawner.SpawnShape();
                 shapeHolder.SetCanSwitch(true);

@@ -1,4 +1,6 @@
 using System;
+using System.Collections;
+using TetrisPuzzle.Utilities;
 using UnityEngine;
 
 namespace TetrisPuzzle.Core
@@ -10,6 +12,7 @@ namespace TetrisPuzzle.Core
         [SerializeField] private Transform emptySquare;
         [SerializeField] private Vector2Int size = new Vector2Int(10, 30);
         [SerializeField] private int header = 8;
+        [SerializeField] private ParticlePlayer[] clearRowFXs;
 
         private Transform[,] grid;
 
@@ -83,7 +86,7 @@ namespace TetrisPuzzle.Core
             }
         }
 
-        public void ClearAllCompletedRows()
+        public IEnumerator ClearAllCompletedRows()
         {
             int clearedRowAmount = 0;
 
@@ -91,10 +94,22 @@ namespace TetrisPuzzle.Core
             {
                 if (IsCompleted(i))
                 {
+                    PlayClearRowFX(clearedRowAmount, i);
                     clearedRowAmount++;
+                }
+            }
+
+            yield return new WaitForSeconds(0.5f);
+
+            for (int i = 0; i < size.y; i++)
+            {
+                if (IsCompleted(i))
+                {
                     ClearRow(i);
                     ShiftRowsDown(i + 1);
                     i--;
+
+                    yield return new WaitForSeconds(0.05f);
                 }
             }
 
@@ -155,6 +170,12 @@ namespace TetrisPuzzle.Core
             }
 
             return false;
+        }
+
+        private void PlayClearRowFX(int effectIndex, int rowIndex)
+        {
+            clearRowFXs[effectIndex].transform.position = new Vector3(0, rowIndex, -2f);
+            clearRowFXs[effectIndex].Play();
         }
     }
 }
