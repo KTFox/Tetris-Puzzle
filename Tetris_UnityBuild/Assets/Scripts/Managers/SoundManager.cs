@@ -32,9 +32,7 @@ namespace TetrisPuzzle
 
         private void Start()
         {
-            SetMusicVolume(0.1f);
-            SetSFXVolume(1f);
-            PlayMusic("BackgroundMusic");
+            PlayMusic("BackgroundMusic", 0.1f);
 
             FindObjectOfType<GameManager>().OnMoveShape += GameManager_OnMoveShape;
             FindObjectOfType<GameManager>().OnHoldShape += GameManager_OnHoldShape;
@@ -45,43 +43,44 @@ namespace TetrisPuzzle
 
         private void GameManager_OnMoveShape()
         {
-            PlaySFX("MoveSFX");
+            PlaySFX("MoveSFX", 0.1f);
         }
 
         private void GameManager_OnHoldShape()
         {
-            PlaySFX("HoldSFX");
+            PlaySFX("HoldSFX", 1f);
         }
 
         private void GameManager_OnFailHoldShape()
         {
-            PlaySFX("FailHoldSFX");
+            PlaySFX("FailHoldSFX", 1f);
         }
 
         private void Board_OnClearRows(int clearedRowAmount)
         {
             if (clearedRowAmount > 0)
             {
-                PlaySFX("ClearRowSFX");
+                PlaySFX("ClearRowSFX", 0.1f);
 
                 if (clearedRowAmount > 1)
                 {
-                    PlaySFX("ClearMultipleRowsSFX");
+                    PlaySFX("ClearMultipleRowsSFX", 0.1f);
                 }
             }
         }
 
         private void SoundManager_OnLevelUp()
         {
-            PlaySFX("LevelUpSFX");
+            PlaySFX("LevelUpSFX", 0.1f);
         }
 
-        public void PlayMusic(string name)
+        public void PlayMusic(string name, float volume)
         {
             Sound sound = Array.Find(musicSounds, x => x.Name == name);
             if (sound != null)
             {
                 musicSource.clip = sound.AudioClip[0];
+                musicSource.volume = volume;
                 musicSource.Play();
             }
             else
@@ -90,12 +89,12 @@ namespace TetrisPuzzle
             }
         }
 
-        public void PlaySFX(string name)
+        public void PlaySFX(string name, float volume)
         {
             Sound sound = Array.Find(sfxSounds, x => x.Name == name);
             if (sound != null)
             {
-                sfxSource.PlayOneShot(sound.AudioClip[Random.Range(0, sound.AudioClip.Length)]);
+                sfxSource.PlayOneShot(sound.AudioClip[Random.Range(0, sound.AudioClip.Length)], volume);
             }
             else
             {
@@ -111,16 +110,6 @@ namespace TetrisPuzzle
         public void ToggleSFX()
         {
             sfxSource.mute = !sfxSource.mute;
-        }
-
-        public void SetMusicVolume(float volume)
-        {
-            musicSource.volume = volume;
-        }
-
-        public void SetSFXVolume(float volume)
-        {
-            sfxSource.volume = volume;
         }
     }
 }
