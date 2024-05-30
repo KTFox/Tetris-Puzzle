@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using TetrisPuzzle.Utilities;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace TetrisPuzzle.Core
@@ -46,34 +47,86 @@ namespace TetrisPuzzle.Core
             }
         }
 
-        public bool IsValidShapePosition(Shape shape)
+        public bool IsOccupied(Shape shape)
         {
             foreach (Transform child in shape.transform)
             {
                 Vector2Int childPosition = Vector2Int.RoundToInt(child.position);
 
-                if (!IsWithinBoard(childPosition))
+                try
                 {
-                    return false;
+                    if (grid[childPosition.x, childPosition.y] != null)
+                    {
+                        return true;
+                    }
                 }
-
-                if (IsOccupied(childPosition))
+                catch
                 {
-                    return false;
+                    return true;
                 }
             }
 
-            return true;
+            return false;
         }
 
-        private bool IsWithinBoard(Vector2Int position)
+        public bool HasReachedLeftLimit(Shape shape)
         {
-            return position.x >= 0 && position.x < size.x && position.y >= 0;
+            foreach (Transform child in shape.transform)
+            {
+                Vector2Int childPosition = Vector2Int.RoundToInt(child.position);
+
+                if (childPosition.x < 0)
+                {
+                    return true;
+                }
+            }
+
+            return false;
         }
 
-        private bool IsOccupied(Vector2Int position)
+        public bool HasReachedRightLimit(Shape shape)
         {
-            return grid[position.x, position.y] != null;
+            foreach (Transform child in shape.transform)
+            {
+                Vector2Int childPosition = Vector2Int.RoundToInt(child.position);
+
+                if (childPosition.x >= size.x)
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        public bool HasReachedBoardRoof(Shape shape)
+        {
+            foreach (Transform child in shape.transform)
+            {
+                Vector2Int childPosition = Vector2Int.RoundToInt(child.position);
+
+                if (childPosition.y >= size.y - header)
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        public bool HasReachedBoardFloor(Shape shape)
+        {
+            foreach (Transform child in shape.transform)
+            {
+                Vector2Int childPosition = Vector2Int.RoundToInt(child.position);
+
+                if (childPosition.y < 0)
+                {
+                    return true;
+                }
+            }
+
+            return false;
         }
 
         public void StoreShapeInGrid(Shape shape)
@@ -128,6 +181,12 @@ namespace TetrisPuzzle.Core
             return true;
         }
 
+        private void PlayClearRowFX(int effectIndex, int rowIndex)
+        {
+            clearRowFXs[effectIndex].transform.position = new Vector3(0, rowIndex, -2f);
+            clearRowFXs[effectIndex].Play();
+        }
+
         private void ClearRow(int rowIndex)
         {
             for (int i = 0; i < size.x; i++)
@@ -156,25 +215,6 @@ namespace TetrisPuzzle.Core
                     grid[i, rowIndex] = null;
                 }
             }
-        }
-
-        public bool HasReachedBoardRoof(Shape shape)
-        {
-            foreach (Transform child in shape.transform)
-            {
-                if (child.position.y >= size.y - header)
-                {
-                    return true;
-                }
-            }
-
-            return false;
-        }
-
-        private void PlayClearRowFX(int effectIndex, int rowIndex)
-        {
-            clearRowFXs[effectIndex].transform.position = new Vector3(0, rowIndex, -2f);
-            clearRowFXs[effectIndex].Play();
         }
     }
 }

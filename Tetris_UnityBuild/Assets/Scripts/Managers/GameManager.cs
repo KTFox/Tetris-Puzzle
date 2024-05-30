@@ -79,7 +79,7 @@ namespace TetrisPuzzle.Managers
                 activeShape.MoveRight();
                 OnMoveShape?.Invoke();
 
-                if (!board.IsValidShapePosition(activeShape))
+                if (board.HasReachedRightLimit(activeShape) || board.IsOccupied(activeShape))
                 {
                     activeShape.MoveLeft();
                 }
@@ -91,20 +91,31 @@ namespace TetrisPuzzle.Managers
                 activeShape.MoveLeft();
                 OnMoveShape?.Invoke();
 
-                if (!board.IsValidShapePosition(activeShape))
+                if (board.HasReachedLeftLimit(activeShape) || board.IsOccupied(activeShape))
                 {
                     activeShape.MoveRight();
                 }
             }
             else if (Input.GetButtonDown("Rotate"))
             {
-                activeShape.RotateRight();
+                Vector3 originalPos = activeShape.transform.position;
+                Quaternion originalRotation = activeShape.transform.rotation;
 
+                activeShape.RotateRight();
                 OnMoveShape?.Invoke();
 
-                if (!board.IsValidShapePosition(activeShape))
+                while (board.HasReachedRightLimit(activeShape))
                 {
-                    activeShape.RotateLeft();
+                    activeShape.MoveLeft();
+                }
+                while (board.HasReachedLeftLimit(activeShape))
+                {
+                    activeShape.MoveRight();
+                }
+                if (board.IsOccupied(activeShape))
+                {
+                    activeShape.transform.position = originalPos;
+                    activeShape.transform.rotation = originalRotation;
                 }
             }
             else if ((Input.GetButton("MoveDown") && Time.time > timeToNextMoveDownKey) || Time.time > timeToDrop)
@@ -115,7 +126,7 @@ namespace TetrisPuzzle.Managers
                 activeShape.MoveDown();
                 OnMoveShape?.Invoke();
 
-                if (!board.IsValidShapePosition(activeShape))
+                if (board.HasReachedBoardFloor(activeShape) || board.IsOccupied(activeShape))
                 {
                     LandShape();
                 }
@@ -179,6 +190,7 @@ namespace TetrisPuzzle.Managers
             }
         }
 
+        #region Unity events
         public void TogglePauseGame()
         {
             Time.timeScale = Time.timeScale == 1 ? 0 : 1;
@@ -189,5 +201,6 @@ namespace TetrisPuzzle.Managers
         {
             SceneManager.LoadScene(0);
         }
+        #endregion
     }
 }

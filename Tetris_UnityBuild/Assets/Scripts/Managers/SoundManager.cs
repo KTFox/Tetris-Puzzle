@@ -32,7 +32,7 @@ namespace TetrisPuzzle
 
         private void Start()
         {
-            SetMusicVolume(0.5f);
+            SetMusicVolume(0.1f);
             SetSFXVolume(1f);
             PlayMusic("BackgroundMusic");
 
