@@ -7,6 +7,7 @@ namespace TetrisPuzzle.Core
         // Variables
 
         [SerializeField] private Transform holdingSpace;
+        [SerializeField] private GameObject cannotSwitchVisual;
 
         private readonly Vector3 DEFAULT_SHAPE_SCALE = Vector3.one;
         private readonly Vector3 HEALD_SHAPE_SCALE = new Vector3(0.5f, 0.5f, 0.5f);
@@ -21,6 +22,11 @@ namespace TetrisPuzzle.Core
 
 
         // Methods
+
+        private void Update()
+        {
+            cannotSwitchVisual.SetActive(!canSwitch);
+        }
 
         public void HoldShape(Shape shape)
         {
