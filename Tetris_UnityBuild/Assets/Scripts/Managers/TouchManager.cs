@@ -1,4 +1,5 @@
 using System;
+using TMPro;
 using UnityEngine;
 
 namespace TetrisPuzzle.Managers
@@ -6,6 +7,8 @@ namespace TetrisPuzzle.Managers
     public class TouchManager : MonoBehaviour
     {
         // Variables
+
+        [SerializeField] private BoxCollider2D touchArea;
 
         [Range(50, 150)]
         [SerializeField] private int minDragDistance = 100;
@@ -33,29 +36,32 @@ namespace TetrisPuzzle.Managers
             {
                 Touch touch = Input.touches[0];
 
-                if (touch.phase == TouchPhase.Began)
+                if (touchArea.OverlapPoint(Camera.main.ScreenToWorldPoint(touch.position)))
                 {
-                    touchMovement = Vector2.zero;
-                    tapTimeMax = Time.time + tapTimeWindow;
-                }
-                else if (touch.phase == TouchPhase.Moved || touch.phase == TouchPhase.Stationary)
-                {
-                    touchMovement += touch.deltaPosition;
+                    if (touch.phase == TouchPhase.Began)
+                    {
+                        touchMovement = Vector2.zero;
+                        tapTimeMax = Time.time + tapTimeWindow;
+                    }
+                    else if (touch.phase == TouchPhase.Moved || touch.phase == TouchPhase.Stationary)
+                    {
+                        touchMovement += touch.deltaPosition;
 
-                    if (touchMovement.magnitude >= minDragDistance)
-                    {
-                        OnDrag?.Invoke(touchMovement);
+                        if (touchMovement.magnitude >= minDragDistance)
+                        {
+                            OnDrag?.Invoke(touchMovement);
+                        }
                     }
-                }
-                else if (touch.phase == TouchPhase.Ended)
-                {
-                    if (touchMovement.magnitude >= minSwipeDistance)
+                    else if (touch.phase == TouchPhase.Ended)
                     {
-                        OnSwipe?.Invoke(touchMovement);
-                    }
-                    else if (Time.time < tapTimeMax)
-                    {
-                        OnTap?.Invoke();
+                        if (touchMovement.magnitude >= minSwipeDistance)
+                        {
+                            OnSwipe?.Invoke(touchMovement);
+                        }
+                        else if (Time.time < tapTimeMax)
+                        {
+                            OnTap?.Invoke();
+                        }
                     }
                 }
             }
