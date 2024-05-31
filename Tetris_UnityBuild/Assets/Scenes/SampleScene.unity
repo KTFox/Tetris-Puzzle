@@ -3563,6 +3563,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d43a868bd6beb67428b90a19684e0841, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  MIN_DRAG_DISTANCE: 100
+  MIN_SWIPE_DISTANCE: 200
+  tapTimeWindow: 0.1
 --- !u!1001 &1059236619
 PrefabInstance:
   m_ObjectHideFlags: 0

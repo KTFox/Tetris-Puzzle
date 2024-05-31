@@ -8,10 +8,10 @@ namespace TetrisPuzzle.Managers
         // Variables
 
         [Range(50, 150)]
-        [SerializeField] private int MIN_DRAG_DISTANCE = 100;
+        [SerializeField] private int minDragDistance = 100;
 
         [Range(50, 250)]
-        [SerializeField] private int MIN_SWIPE_DISTANCE = 200;
+        [SerializeField] private int minSwipeDistance = 200;
 
         [SerializeField] private float tapTimeWindow = 0.1f;
 
@@ -42,14 +42,14 @@ namespace TetrisPuzzle.Managers
                 {
                     touchMovement += touch.deltaPosition;
 
-                    if (touchMovement.magnitude >= MIN_DRAG_DISTANCE)
+                    if (touchMovement.magnitude >= minDragDistance)
                     {
                         OnDrag?.Invoke(touchMovement);
                     }
                 }
                 else if (touch.phase == TouchPhase.Ended)
                 {
-                    if (touchMovement.magnitude >= MIN_SWIPE_DISTANCE)
+                    if (touchMovement.magnitude >= minSwipeDistance)
                     {
                         OnSwipe?.Invoke(touchMovement);
                     }
