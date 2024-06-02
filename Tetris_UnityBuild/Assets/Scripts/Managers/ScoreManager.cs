@@ -8,11 +8,14 @@ namespace TetrisPuzzle
     {
         // Variables
 
+        private const string HIGH_SCORE = "HighScore";
+
         private int score;
         private int reward;
 
         // Properties
 
+        public int HighScore => PlayerPrefs.GetInt(HIGH_SCORE);
         public int Score => score;
         public int Reward => reward;
 
@@ -44,6 +47,11 @@ namespace TetrisPuzzle
                     score += 40;
                     reward += 4;
                     break;
+            }
+
+            if (score > PlayerPrefs.GetInt(HIGH_SCORE, 0))
+            {
+                PlayerPrefs.SetInt(HIGH_SCORE, score);
             }
         }
     }

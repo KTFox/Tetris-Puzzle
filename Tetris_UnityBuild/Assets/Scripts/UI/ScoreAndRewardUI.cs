@@ -7,6 +7,7 @@ namespace TetrisPuzzle.UI
     {
         // Variables
 
+        [SerializeField] private TextMeshProUGUI highScoreText;
         [SerializeField] private TextMeshProUGUI scoreText;
         [SerializeField] private TextMeshProUGUI rewardText;
 
@@ -22,8 +23,9 @@ namespace TetrisPuzzle.UI
 
         private void Update()
         {
+            highScoreText.text = $"High score: {scoreManager.HighScore.ToString()}";
             scoreText.text = $"Score: {scoreManager.Score}";
-            rewardText.text = $"{scoreManager.Reward}";
+            rewardText.text = scoreManager.Reward.ToString();
         }
     }
 }
