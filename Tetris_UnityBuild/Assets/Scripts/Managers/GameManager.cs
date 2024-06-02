@@ -21,7 +21,7 @@ namespace TetrisPuzzle.Managers
 
         // Drop speed balancing
         private float defaultDroppingInterval = 0.5f;
-        private float accelerationFactor = 0.1f;
+        private float accelerationFactor = 500f;
         private float timeToDrop;
 
         // Used for left,right keys
@@ -217,7 +217,7 @@ namespace TetrisPuzzle.Managers
 
         private float GetDroppingInterval()
         {
-            return defaultDroppingInterval * Mathf.Pow(1 - accelerationFactor, scoreManager.Level - 1);
+            return defaultDroppingInterval / (1 + scoreManager.Score / accelerationFactor);
         }
 
         private void LandShape()

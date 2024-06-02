@@ -3,11 +3,12 @@ using UnityEngine;
 
 namespace TetrisPuzzle.UI
 {
-    public class LineUI : MonoBehaviour
+    public class ScoreAndRewardUI : MonoBehaviour
     {
         // Variables
 
-        [SerializeField] private TextMeshProUGUI lineText;
+        [SerializeField] private TextMeshProUGUI scoreText;
+        [SerializeField] private TextMeshProUGUI rewardText;
 
         private ScoreManager scoreManager;
 
@@ -21,7 +22,8 @@ namespace TetrisPuzzle.UI
 
         private void Update()
         {
-            lineText.text = scoreManager.Lines.ToString();
+            scoreText.text = $"Score: {scoreManager.Score}";
+            rewardText.text = $"{scoreManager.Reward}";
         }
     }
 }

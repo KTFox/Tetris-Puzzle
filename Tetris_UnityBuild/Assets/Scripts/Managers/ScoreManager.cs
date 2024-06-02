@@ -8,35 +8,20 @@ namespace TetrisPuzzle
     {
         // Variables
 
-        private int linesPerLevel = 2;
         private int score;
-        private int lines;
-        private int level = 1;
+        private int reward;
 
         // Properties
 
         public int Score => score;
-        public int Lines => lines;
-        public int Level => level;
-
-        // Events
-
-        public event Action OnLevelUp;
+        public int Reward => reward;
 
 
         // Methods
 
         private void Start()
         {
-            ResetScore();
-
             FindObjectOfType<Board>().OnClearRows += ScoreManager_OnClearLines;
-        }
-
-        private void ResetScore()
-        {
-            level = 1;
-            lines = linesPerLevel * level;
         }
 
         private void ScoreManager_OnClearLines(int lines)
@@ -44,32 +29,22 @@ namespace TetrisPuzzle
             switch (lines)
             {
                 case 1:
-                    score += 40 * level;
+                    score += 5;
+                    reward += 1;
                     break;
                 case 2:
-                    score += 100 * level;
+                    score += 10;
+                    reward += 2;
                     break;
                 case 3:
-                    score += 300 * level;
+                    score += 20;
+                    reward += 3;
                     break;
                 case 4:
-                    score += 1200 * level;
+                    score += 40;
+                    reward += 4;
                     break;
             }
-
-            this.lines -= lines;
-            if (this.lines <= 0)
-            {
-                LevelUp();
-            }
-        }
-
-        private void LevelUp()
-        {
-            level++;
-            lines = linesPerLevel * level;
-
-            OnLevelUp?.Invoke();
         }
     }
 }
