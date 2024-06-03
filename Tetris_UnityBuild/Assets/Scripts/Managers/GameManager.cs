@@ -1,6 +1,7 @@
 using System;
 using TetrisPuzzle.Core;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace TetrisPuzzle.Managers
 {
@@ -292,6 +293,11 @@ namespace TetrisPuzzle.Managers
             Time.timeScale = Time.timeScale == 1 ? 0 : 1;
             pausePanel.SetActive(!pausePanel.gameObject.activeSelf);
             isGamePaused = !isGamePaused;
+        }
+
+        public void RestartGame()
+        {
+            SceneManager.LoadScene(1);
         }
     }
 }
