@@ -25,7 +25,6 @@ namespace TetrisPuzzle.UI
         {
             highScoreText.text = $"High score: {scoreManager.HighScore.ToString()}";
             scoreText.text = $"Score: {scoreManager.Score}";
-            rewardText.text = scoreManager.Reward.ToString();
         }
     }
 }
