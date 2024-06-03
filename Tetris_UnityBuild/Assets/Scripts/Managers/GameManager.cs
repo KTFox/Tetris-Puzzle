@@ -134,7 +134,7 @@ namespace TetrisPuzzle.Managers
             {
                 MoveShapeToTheLeft();
             }
-            else if ((swipeDirection == SwipeDirection.up && Time.time > timeToNextSwipe) || didTap == true)
+            else if (didTap == true)
             {
                 RotateShape();
             }
