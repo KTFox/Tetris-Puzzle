@@ -1,7 +1,6 @@
 using System;
 using TetrisPuzzle.Core;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 namespace TetrisPuzzle.Managers
 {
@@ -25,8 +24,8 @@ namespace TetrisPuzzle.Managers
         private float timeToDrop;
 
         // Used for left,right keys
-        [Range(0f, 1f)]
-        public float MinTimeToDrag = 0.15f;
+        private const string MIN_TIME_TO_DRAG = "minTimeToDrag";
+        private float minTimeToDrag = 0.5f;
         private float minTimeToSwipe = 0.3f;
         private float timeToNextDrag;
         private float timeToNextSwipe;
@@ -40,6 +39,20 @@ namespace TetrisPuzzle.Managers
         private Shape activeShape;
         private bool isGamePaused;
         private bool isGameOver;
+
+        // Properties
+
+        public float MinTimeToDrag
+        {
+            set
+            {
+                minTimeToDrag = value;
+                PlayerPrefs.SetFloat(MIN_TIME_TO_DRAG, minTimeToDrag);
+                PlayerPrefs.Save();
+            }
+
+            get => minTimeToDrag;
+        }
 
         // Events
 
@@ -66,6 +79,11 @@ namespace TetrisPuzzle.Managers
             TouchManager.OnDrag -= TouchManager_OnDrag;
             TouchManager.OnSwipe -= TouchManager_OnSwipe;
             TouchManager.OnTap -= TouchManager_OnTap;
+        }
+
+        private void Awake()
+        {
+            MinTimeToDrag = PlayerPrefs.GetFloat(MIN_TIME_TO_DRAG);
         }
 
         private void Start()
@@ -151,7 +169,7 @@ namespace TetrisPuzzle.Managers
 
         private void MoveShapeToTheRight()
         {
-            timeToNextDrag = Time.time + MinTimeToDrag;
+            timeToNextDrag = Time.time + minTimeToDrag;
             timeToNextSwipe = Time.time + minTimeToSwipe;
 
             activeShape.MoveRight();
@@ -165,7 +183,7 @@ namespace TetrisPuzzle.Managers
 
         private void MoveShapeToTheLeft()
         {
-            timeToNextDrag = Time.time + MinTimeToDrag;
+            timeToNextDrag = Time.time + minTimeToDrag;
 
             activeShape.MoveLeft();
             OnMoveShape?.Invoke();
@@ -205,7 +223,7 @@ namespace TetrisPuzzle.Managers
         private void MoveShapeDown()
         {
             timeToDrop = Time.time + GetDroppingInterval();
-            timeToNextDrag = Time.time + MinTimeToDrag;
+            timeToNextDrag = Time.time + minTimeToDrag;
 
             activeShape.MoveDown();
             OnMoveShape?.Invoke();

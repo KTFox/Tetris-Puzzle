@@ -48,7 +48,7 @@ namespace TetrisPuzzle.UI
                 buttonImage.sprite = buttonImage.sprite == toggleSoundButton.ActiveSprite ? toggleSoundButton.InactiveSprite : toggleSoundButton.ActiveSprite;
             });
 
-            dragSensitiveSlider.value = gameManager.MinTimeToDrag;
+            dragSensitiveSlider.value = 1 - gameManager.MinTimeToDrag;
         }
 
         public void UpdateSlider()
