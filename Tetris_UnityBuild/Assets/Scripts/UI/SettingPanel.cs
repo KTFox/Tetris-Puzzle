@@ -13,6 +13,7 @@ namespace TetrisPuzzle.UI
         [SerializeField] private ToggleButton toggleSoundButton;
 
         private GameManager gameManager;
+        private SoundManager soundManager;
 
         // Structs
 
@@ -23,6 +24,18 @@ namespace TetrisPuzzle.UI
             public Image ButtonImage;
             public Sprite ActiveSprite;
             public Sprite InactiveSprite;
+
+            public void SetState(bool isActive)
+            {
+                if (isActive)
+                {
+                    ButtonImage.sprite = ActiveSprite;
+                }
+                else
+                {
+                    ButtonImage.sprite = InactiveSprite;
+                }
+            }
         }
 
 
@@ -31,24 +44,23 @@ namespace TetrisPuzzle.UI
         private void Start()
         {
             gameManager = FindObjectOfType<GameManager>();
+            soundManager = FindObjectOfType<SoundManager>();
 
             toggleMusicButton.Button.onClick.AddListener(() =>
             {
-                FindObjectOfType<SoundManager>().ToggleMusic();
-
-                Image buttonImage = toggleMusicButton.ButtonImage;
-                buttonImage.sprite = buttonImage.sprite == toggleMusicButton.ActiveSprite ? toggleMusicButton.InactiveSprite : toggleMusicButton.ActiveSprite;
+                soundManager.ToggleMusic();
+                toggleMusicButton.SetState(!soundManager.IsMusicMuted);
             });
 
             toggleSoundButton.Button.onClick.AddListener(() =>
             {
-                FindObjectOfType<SoundManager>().ToggleSFX();
-
-                Image buttonImage = toggleSoundButton.ButtonImage;
-                buttonImage.sprite = buttonImage.sprite == toggleSoundButton.ActiveSprite ? toggleSoundButton.InactiveSprite : toggleSoundButton.ActiveSprite;
+                soundManager.ToggleSFX();
+                toggleSoundButton.SetState(!soundManager.IsSFXMuted);
             });
 
             dragSensitiveSlider.value = 1 - gameManager.MinTimeToDrag;
+            toggleMusicButton.SetState(!soundManager.IsMusicMuted);
+            toggleSoundButton.SetState(!soundManager.IsSFXMuted);
         }
 
         public void UpdateSlider()

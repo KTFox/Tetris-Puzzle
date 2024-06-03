@@ -13,6 +13,9 @@ namespace TetrisPuzzle
         [SerializeField] private Sound[] musicSounds, sfxSounds;
         [SerializeField] private AudioSource musicSource, sfxSource;
 
+        private const string IS_MUSIC_MUTED = "IsMusicMuted";
+        private const string IS_SFX_MUTED = "IsSFXMuted";
+
         // Properties
 
         public bool IsMusicMuted => musicSource.mute;
@@ -29,6 +32,27 @@ namespace TetrisPuzzle
 
 
         // Methods
+
+        private void Awake()
+        {
+            if (PlayerPrefs.GetInt(IS_MUSIC_MUTED) == 0)
+            {
+                musicSource.mute = true;
+            }
+            else
+            {
+                musicSource.mute = false;
+            }
+
+            if (PlayerPrefs.GetInt(IS_SFX_MUTED) == 0)
+            {
+                sfxSource.mute = true;
+            }
+            else
+            {
+                sfxSource.mute = false;
+            }
+        }
 
         private void Start()
         {
@@ -99,11 +123,29 @@ namespace TetrisPuzzle
         public void ToggleMusic()
         {
             musicSource.mute = !musicSource.mute;
+
+            if (musicSource.mute)
+            {
+                PlayerPrefs.SetInt(IS_MUSIC_MUTED, 0);
+            }
+            else
+            {
+                PlayerPrefs.SetInt(IS_MUSIC_MUTED, 1);
+            }
         }
 
         public void ToggleSFX()
         {
             sfxSource.mute = !sfxSource.mute;
+
+            if (sfxSource.mute)
+            {
+                PlayerPrefs.SetInt(IS_SFX_MUTED, 0);
+            }
+            else
+            {
+                PlayerPrefs.SetInt(IS_SFX_MUTED, 1);
+            }
         }
     }
 }
