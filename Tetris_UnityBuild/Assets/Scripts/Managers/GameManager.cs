@@ -25,7 +25,8 @@ namespace TetrisPuzzle.Managers
         private float timeToDrop;
 
         // Used for left,right keys
-        private float minTimeToDrag = 0.15f;
+        [Range(0f, 1f)]
+        public float MinTimeToDrag = 0.15f;
         private float minTimeToSwipe = 0.3f;
         private float timeToNextDrag;
         private float timeToNextSwipe;
@@ -150,7 +151,7 @@ namespace TetrisPuzzle.Managers
 
         private void MoveShapeToTheRight()
         {
-            timeToNextDrag = Time.time + minTimeToDrag;
+            timeToNextDrag = Time.time + MinTimeToDrag;
             timeToNextSwipe = Time.time + minTimeToSwipe;
 
             activeShape.MoveRight();
@@ -164,7 +165,7 @@ namespace TetrisPuzzle.Managers
 
         private void MoveShapeToTheLeft()
         {
-            timeToNextDrag = Time.time + minTimeToDrag;
+            timeToNextDrag = Time.time + MinTimeToDrag;
 
             activeShape.MoveLeft();
             OnMoveShape?.Invoke();
@@ -204,7 +205,7 @@ namespace TetrisPuzzle.Managers
         private void MoveShapeDown()
         {
             timeToDrop = Time.time + GetDroppingInterval();
-            timeToNextDrag = Time.time + minTimeToDrag;
+            timeToNextDrag = Time.time + MinTimeToDrag;
 
             activeShape.MoveDown();
             OnMoveShape?.Invoke();
@@ -240,7 +241,6 @@ namespace TetrisPuzzle.Managers
             }
         }
 
-        #region Unity events
         public void HandleHoldingShape()
         {
             if (shapeHolder.IsEmptyHolder)
@@ -275,11 +275,5 @@ namespace TetrisPuzzle.Managers
             pausePanel.SetActive(!pausePanel.gameObject.activeSelf);
             isGamePaused = !isGamePaused;
         }
-
-        public void RestartGame()
-        {
-            SceneManager.LoadScene(0);
-        }
-        #endregion
     }
 }

@@ -9,17 +9,12 @@ namespace TetrisPuzzle.Managers
         // Variables
 
         [SerializeField] private BoxCollider2D touchArea;
-
-        [Range(50, 150)]
-        [SerializeField] private int minDragDistance = 100;
-
-        [Range(50, 250)]
-        [SerializeField] private int minSwipeDistance = 200;
-
         [SerializeField] private float tapTimeWindow = 0.1f;
 
         private Vector2 touchMovement;
         private float tapTimeMax;
+        private int minDragDistance = 100;
+        private int minSwipeDistance = 200;
 
         // Events
 
