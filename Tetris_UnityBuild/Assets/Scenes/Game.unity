@@ -2321,7 +2321,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &501327430
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5158,19 +5158,6 @@ MonoBehaviour:
   - Name: ClearRowSFX
     AudioClip:
     - {fileID: 8300000, guid: 23914e3dc789c6443aee3d2758aa54a9, type: 3}
-  - Name: ClearMultipleRowsSFX
-    AudioClip:
-    - {fileID: 8300000, guid: 09e21287f7c9913489e69fbc25404292, type: 3}
-    - {fileID: 8300000, guid: e26987df0653e8049a7f34c7df791153, type: 3}
-  - Name: LevelUpSFX
-    AudioClip:
-    - {fileID: 8300000, guid: 198d7577d0fbacd499c6d1082609e6bd, type: 3}
-  - Name: HoldSFX
-    AudioClip:
-    - {fileID: 8300000, guid: bda4651224da6534b93544e5af0226bc, type: 3}
-  - Name: FailHoldSFX
-    AudioClip:
-    - {fileID: 8300000, guid: bdadde2956e73ab49af03c85ebb52975, type: 3}
   musicSource: {fileID: 379787330}
   sfxSource: {fileID: 783686166}
 --- !u!4 &1082865060

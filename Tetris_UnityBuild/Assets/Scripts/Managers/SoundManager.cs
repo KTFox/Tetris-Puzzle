@@ -59,8 +59,6 @@ namespace TetrisPuzzle
             PlayMusic("BackgroundMusic", 0.1f);
 
             FindObjectOfType<GameManager>().OnMoveShape += GameManager_OnMoveShape;
-            FindObjectOfType<GameManager>().OnHoldShape += GameManager_OnHoldShape;
-            FindObjectOfType<GameManager>().OnFailHoldShape += GameManager_OnFailHoldShape;
             FindObjectOfType<Board>().OnClearRows += Board_OnClearRows;
         }
 
@@ -69,26 +67,11 @@ namespace TetrisPuzzle
             PlaySFX("MoveSFX", 0.1f);
         }
 
-        private void GameManager_OnHoldShape()
-        {
-            PlaySFX("HoldSFX", 1f);
-        }
-
-        private void GameManager_OnFailHoldShape()
-        {
-            PlaySFX("FailHoldSFX", 1f);
-        }
-
         private void Board_OnClearRows(int clearedRowAmount)
         {
             if (clearedRowAmount > 0)
             {
                 PlaySFX("ClearRowSFX", 0.1f);
-
-                if (clearedRowAmount > 1)
-                {
-                    PlaySFX("ClearMultipleRowsSFX", 0.1f);
-                }
             }
         }
 

@@ -58,8 +58,6 @@ namespace TetrisPuzzle.Managers
         // Events
 
         public event Action OnMoveShape;
-        public event Action OnHoldShape;
-        public event Action OnFailHoldShape;
 
         // enums
 
@@ -267,8 +265,6 @@ namespace TetrisPuzzle.Managers
                 shapeHolder.HoldShape(activeShape);
                 activeShape = shapeSpawner.SpawnShape();
                 ghostDrawer.ResetGhostShape();
-
-                OnHoldShape?.Invoke();
             }
             else if (!shapeHolder.IsEmptyHolder && shapeHolder.CanSwitch)
             {
@@ -279,12 +275,6 @@ namespace TetrisPuzzle.Managers
 
                 shapeHolder.HoldShape(shapeToHold);
                 ghostDrawer.ResetGhostShape();
-
-                OnHoldShape?.Invoke();
-            }
-            else
-            {
-                OnFailHoldShape?.Invoke();
             }
         }
 
