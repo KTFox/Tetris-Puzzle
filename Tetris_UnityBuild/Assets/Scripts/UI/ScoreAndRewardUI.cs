@@ -3,11 +3,13 @@ using UnityEngine;
 
 namespace TetrisPuzzle.UI
 {
-    public class ScoreUI : MonoBehaviour
+    public class ScoreAndRewardUI : MonoBehaviour
     {
         // Variables
 
+        [SerializeField] private TextMeshProUGUI highScoreText;
         [SerializeField] private TextMeshProUGUI scoreText;
+        [SerializeField] private TextMeshProUGUI rewardText;
 
         private ScoreManager scoreManager;
 
@@ -21,18 +23,8 @@ namespace TetrisPuzzle.UI
 
         private void Update()
         {
-            scoreText.text = GetPadZero(scoreManager.Score, 7);
-        }
-
-        private string GetPadZero(int number, int padDigits)
-        {
-            string str = number.ToString();
-            while (str.Length < padDigits)
-            {
-                str = "0" + str;
-            }
-
-            return str;
+            highScoreText.text = $"High score: {scoreManager.HighScore.ToString()}";
+            scoreText.text = $"Score: {scoreManager.Score}";
         }
     }
 }

@@ -13,6 +13,9 @@ namespace TetrisPuzzle
         [SerializeField] private Sound[] musicSounds, sfxSounds;
         [SerializeField] private AudioSource musicSource, sfxSource;
 
+        private const string IS_MUSIC_MUTED = "IsMusicMuted";
+        private const string IS_SFX_MUTED = "IsSFXMuted";
+
         // Properties
 
         public bool IsMusicMuted => musicSource.mute;
@@ -30,15 +33,33 @@ namespace TetrisPuzzle
 
         // Methods
 
+        private void Awake()
+        {
+            if (PlayerPrefs.GetInt(IS_MUSIC_MUTED) == 0)
+            {
+                musicSource.mute = true;
+            }
+            else
+            {
+                musicSource.mute = false;
+            }
+
+            if (PlayerPrefs.GetInt(IS_SFX_MUTED) == 0)
+            {
+                sfxSource.mute = true;
+            }
+            else
+            {
+                sfxSource.mute = false;
+            }
+        }
+
         private void Start()
         {
             PlayMusic("BackgroundMusic", 0.1f);
 
             FindObjectOfType<GameManager>().OnMoveShape += GameManager_OnMoveShape;
-            FindObjectOfType<GameManager>().OnHoldShape += GameManager_OnHoldShape;
-            FindObjectOfType<GameManager>().OnFailHoldShape += GameManager_OnFailHoldShape;
             FindObjectOfType<Board>().OnClearRows += Board_OnClearRows;
-            FindObjectOfType<ScoreManager>().OnLevelUp += SoundManager_OnLevelUp;
         }
 
         private void GameManager_OnMoveShape()
@@ -46,32 +67,12 @@ namespace TetrisPuzzle
             PlaySFX("MoveSFX", 0.1f);
         }
 
-        private void GameManager_OnHoldShape()
-        {
-            PlaySFX("HoldSFX", 1f);
-        }
-
-        private void GameManager_OnFailHoldShape()
-        {
-            PlaySFX("FailHoldSFX", 1f);
-        }
-
         private void Board_OnClearRows(int clearedRowAmount)
         {
             if (clearedRowAmount > 0)
             {
                 PlaySFX("ClearRowSFX", 0.1f);
-
-                if (clearedRowAmount > 1)
-                {
-                    PlaySFX("ClearMultipleRowsSFX", 0.1f);
-                }
             }
-        }
-
-        private void SoundManager_OnLevelUp()
-        {
-            PlaySFX("LevelUpSFX", 0.1f);
         }
 
         public void PlayMusic(string name, float volume)
@@ -105,11 +106,29 @@ namespace TetrisPuzzle
         public void ToggleMusic()
         {
             musicSource.mute = !musicSource.mute;
+
+            if (musicSource.mute)
+            {
+                PlayerPrefs.SetInt(IS_MUSIC_MUTED, 0);
+            }
+            else
+            {
+                PlayerPrefs.SetInt(IS_MUSIC_MUTED, 1);
+            }
         }
 
         public void ToggleSFX()
         {
             sfxSource.mute = !sfxSource.mute;
+
+            if (sfxSource.mute)
+            {
+                PlayerPrefs.SetInt(IS_SFX_MUTED, 0);
+            }
+            else
+            {
+                PlayerPrefs.SetInt(IS_SFX_MUTED, 1);
+            }
         }
     }
 }
