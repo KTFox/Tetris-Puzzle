@@ -332,7 +332,7 @@ namespace TetrisPuzzle.Managers
 
         public void RestartGame()
         {
-            SceneManager.LoadScene(1);
+            SceneManager.LoadScene(0);
         }
     }
 }
