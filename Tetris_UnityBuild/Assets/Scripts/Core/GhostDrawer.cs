@@ -16,7 +16,7 @@ namespace TetrisPuzzle.Core
 
         // Methods
 
-        private void Start()
+        private void Awake()
         {
             gameBoard = FindObjectOfType<Board>();
         }

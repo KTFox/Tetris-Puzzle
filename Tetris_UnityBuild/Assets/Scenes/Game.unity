@@ -2345,7 +2345,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &453056061
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2473,9 +2473,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1772424049}
-        m_TargetAssemblyTypeName: TetrisPuzzle.UI.MainMenuUI, Assembly-CSharp
-        m_MethodName: PlayGame
+      - m_Target: {fileID: 859721762}
+        m_TargetAssemblyTypeName: TetrisPuzzle.Managers.GameManager, Assembly-CSharp
+        m_MethodName: StartGame
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2756,7 +2756,7 @@ Transform:
   m_GameObject: {fileID: 519420028}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 6, y: 13, z: -10}
+  m_LocalPosition: {x: 6, y: 39, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4407,8 +4407,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0abd5dbf1fb816c4da662f72bb81c5a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mainMenuPanel: {fileID: 1772424047}
+  inGamePanel: {fileID: 1319841711}
   gameOverPanel: {fileID: 501327429}
   pausePanel: {fileID: 192979350}
+  worldSpaceCanvas: {fileID: 1218452059}
+  inGameCameraPosition: {x: 6, y: 13, z: -10}
+  cameraMoveTime: 4
 --- !u!1 &870308394
 GameObject:
   m_ObjectHideFlags: 0
@@ -5753,7 +5758,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1218452060
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6384,7 +6389,7 @@ GameObject:
   - component: {fileID: 1319841712}
   - component: {fileID: 1319841713}
   m_Layer: 5
-  m_Name: Main Panel
+  m_Name: InGame Panel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8180,6 +8185,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1772424048}
   - component: {fileID: 1772424049}
+  - component: {fileID: 1772424050}
   m_Layer: 5
   m_Name: Main Menu Panel
   m_TagString: Untagged
@@ -8220,7 +8226,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fdb97307dd6ca13468cee23da31490ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inGameCameraPosition: {x: 5, y: 13, z: -10}
+--- !u!225 &1772424050
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1772424047}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &1773859907
 GameObject:
   m_ObjectHideFlags: 0

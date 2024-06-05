@@ -1,5 +1,8 @@
+using DG.Tweening;
 using System;
+using System.Collections;
 using TetrisPuzzle.Core;
+using TetrisPuzzle.UI;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -9,8 +12,16 @@ namespace TetrisPuzzle.Managers
     {
         // Variables
 
+        [Header("Panels")]
+        [SerializeField] private GameObject mainMenuPanel;
+        [SerializeField] private GameObject inGamePanel;
         [SerializeField] private GameObject gameOverPanel;
         [SerializeField] private GameObject pausePanel;
+        [SerializeField] private GameObject worldSpaceCanvas;
+
+        [Header("Starting game transition")]
+        [SerializeField] private Vector3 inGameCameraPosition;
+        [SerializeField] private float cameraMoveTime;
 
         // Caching 
         private ScoreManager scoreManager;
@@ -93,24 +104,32 @@ namespace TetrisPuzzle.Managers
             ghostDrawer = FindObjectOfType<GhostDrawer>();
             shapeHolder = FindObjectOfType<ShapeHolder>();
 
+            isGamePaused = true;
+
+            mainMenuPanel.SetActive(true);
+            inGamePanel.SetActive(false);
             gameOverPanel.SetActive(false);
             pausePanel.SetActive(false);
-
-            activeShape = shapeSpawner.SpawnShape();
+            worldSpaceCanvas.SetActive(false);
+            board.gameObject.SetActive(false);
         }
 
         private void Update()
         {
-            if (isGamePaused || isGameOver) return;
+            if (isGamePaused || isGameOver || activeShape == null) return;
 
             HandlePlayerInput();
         }
 
         private void LateUpdate()
         {
-            ghostDrawer.DrawGhost(activeShape);
+            if (activeShape != null)
+            {
+                ghostDrawer.DrawGhost(activeShape);
+            }
         }
 
+        #region Shape controller
         private void TouchManager_OnDrag(Vector2 touchMovement)
         {
             dragDirection = GetSwipeDirection(touchMovement);
@@ -257,6 +276,7 @@ namespace TetrisPuzzle.Managers
                 gameOverPanel.SetActive(true);
             }
         }
+        #endregion
 
         public void HandleHoldingShape()
         {
@@ -276,6 +296,31 @@ namespace TetrisPuzzle.Managers
                 shapeHolder.HoldShape(shapeToHold);
                 ghostDrawer.ResetGhostShape();
             }
+        }
+
+        public void StartGame()
+        {
+            StartCoroutine(StartGameCoroutine());
+        }
+
+        private IEnumerator StartGameCoroutine()
+        {
+            yield return mainMenuPanel.GetComponent<MainMenuPanel>().FadeOut();
+
+            mainMenuPanel.SetActive(false);
+            Camera.main.transform.DOMove(inGameCameraPosition, cameraMoveTime);
+
+            yield return new WaitForSeconds(cameraMoveTime);
+
+            inGamePanel.SetActive(true);
+            board.gameObject.SetActive(true);
+
+            yield return board.DrawEmptyCells();
+
+            inGamePanel.gameObject.SetActive(true);
+            worldSpaceCanvas.SetActive(true);
+            activeShape = shapeSpawner.SpawnShape();
+            isGamePaused = false;
         }
 
         public void TogglePauseGame()

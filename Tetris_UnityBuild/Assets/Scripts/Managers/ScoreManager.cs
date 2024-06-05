@@ -20,7 +20,7 @@ namespace TetrisPuzzle
 
         // Methods
 
-        private void Start()
+        private void OnEnable()
         {
             FindObjectOfType<Board>().OnClearRows += ScoreManager_OnClearLines;
         }

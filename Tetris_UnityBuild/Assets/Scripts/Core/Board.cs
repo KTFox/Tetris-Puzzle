@@ -28,13 +28,13 @@ namespace TetrisPuzzle.Core
         {
             grid = new Transform[size.x, size.y];
         }
-
-        private void Start()
+        
+        public Coroutine DrawEmptyCells()
         {
-            DrawEmptyCells();
+            return StartCoroutine(DrawEmptyCellsCoroutine());
         }
 
-        private void DrawEmptyCells()
+        private IEnumerator DrawEmptyCellsCoroutine()
         {
             for (int i = 0; i < size.y - header; i++)
             {
@@ -44,6 +44,8 @@ namespace TetrisPuzzle.Core
                     cell.parent = transform;
                     cell.name = $"Board space ({j}, {i})";
                 }
+
+                yield return new WaitForSeconds(0.01f);
             }
         }
 
