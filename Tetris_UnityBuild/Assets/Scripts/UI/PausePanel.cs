@@ -16,7 +16,7 @@ namespace TetrisPuzzle
         public void Restart()
         {
             Time.timeScale = 1f;
-            SceneManager.LoadScene(1);
+            SceneManager.LoadScene(0);
         }
     }
 }
